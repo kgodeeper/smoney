@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Smoney | Caculator</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <style>
+          @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600;700&display=swap');
+          *{
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+               font-family: 'Public Sans', sans-serif;
+               user-select: none;
+               background-color: #161616;
+          }
+          .navbar{
+               height: 50px;
+               border-bottom: 2px solid #f8f8f8;
+          }
+          .logo{
+               font-size: 25px !important;
+               color: white;
+               font-weight: bold;
+          }
+          .page-container{
+               height: calc(100vh - 50px);
+               margin-top: 50px;
+               min-height: 500px;
+          }
+          .myinp{
+               width: 400px;
+               display: block;
+               margin: 10px auto !important;
+               padding: 5px 10px;
+               border: none;
+               outline: none;
+               box-shadow: -3px -3px 7px #ffffff22, 3px 3px 7px #000000;
+               border-radius: 5px;
+               background-color: #06060606;
+               box-sizing: content-box;
+               color: white;
+               font-size: 14px !important;
+               font-weight: normal;
+          }
+          .caculator-btn{
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               padding: 5px 30px;
+               color: #dc3545;
+               border-radius: 5px;
+               font-size: 14px !important;
+               margin: 0 auto !important;
+               margin-top: 5px !important;
+               box-shadow: -3px -3px 7px #ffffff22, 3px 3px 7px #000000;
+          }
+          .caculator-btn i{
+               background-color: inherit;
+          }
+          .caculator-btn:active{
+               box-shadow: 0px 0px 4px #1f0a0a;
+          }
+          .myinp:focus-visible{
+               box-shadow: inset -3px -3px 7px #ffffff22,inset 3px 3px 7px #000000;
+          }
+          .myanchor{
+               font-size: 15px;
+               margin: 0px 10px;
+               text-decoration: none;
+               color: #939393;
+          }
+          .myanchor:hover{
+               color: white !important;
+               transition: .3s;
+          }
+          .loader {
+               color: inherit;
+               font-size: 3px;
+               margin: 0px auto;
+               width: 1em;
+               height: 1em;
+               border-radius: 50%;
+               position: relative;
+               text-indent: -9999em;
+               animation: load4 1.3s infinite linear;
+               /* -webkit-transform: translateZ(0);
+               -ms-transform: translateZ(0);
+               transform: translateZ(0);  */
+          }
+          @keyframes load4 {
+               0%,
+               100% {
+               box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+               }
+               12.5% {
+               box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+               }
+               25% {
+               box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+               }
+               37.5% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+               }
+               50% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+               }
+               62.5% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+               }
+               75% {
+               box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+               }
+               87.5% {
+               box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+               }
+          }
+          .power-container{
+               height: 97%;
+               width: calc(100% - 400px);
+               min-width: 700px;
+          }
+          .bill{
+               font-size: 14px;
+               background-color: #d0d1e2;
+               border-radius: 10px;
+               width: 400px;
+               height: 94%;
+               box-shadow: -3px -3px 8px #ffffff22, 3px 3px 8px #000000;
+          }
+          .bill h6{
+               background-color: inherit;
+               font-weight: bold;
+          }
+          .bill div{
+               background-color: inherit;
+          }
+          .power-container{
+               min-width: 400px;
+          }
+          .info{
+               font-size: 12px !important;
+               font-weight: bold;
+          }
+     </style>
+</head>
+<body>
+     <div class="navbar px-4 w-100 position-fixed top-0 start-0 d-flex justify-content-between align-items-center">
+          <div class="logo">
+               <i class="fas fa-file-invoice-dollar text-warning"></i>
+               Smoney.
+          </div>
+          <div class="navigation-links d-flex justify-content-center align-items-center">
+               <a class="myanchor text-white">Caculator</a>
+               <a class="myanchor" href="/app/power">Power</a>
+               <a href="/app/bill" class="myanchor">Bill</a>
+          </div>
+     </div>
+     <div class="page-container px-5 d-flex justify-content-center align-items-center">
+          <div class="power-container d-flex align-items-start justify-content-start flex-column">
+               <div class="power-inps w-100 d-flex align-items-center justify-content-center flex-column">
+                    <input type="date" class="myinp month" min=0 placeholder="Month" readonly>
+                    <input type="number" class="myinp nom" min=0 placeholder="Number of month">
+                    <input type="number" class="myinp cur" min=0 placeholder="Power of previous month" readonly>
+                    <input type="number" class="myinp prv" min=0 placeholder="Power of current month" readonly>
+                    <input type="number" class="myinp wtr" min=0 placeholder="Water money">
+               </div>
+               <div class="caculator-btn">
+                    Solve
+               </div>
+               <p class="m-0 auth-error text-warning text-center mt-3 w-100"></p>
+          </div>
+          <div class="bill py-2">
+               <h6 class="m-0 text-center">Bill</h6>
+               <div class="px-4 info datetime">Date-time: Unknow</div>
+               <div class="total px-4 info total">Total: 0đ</div>
+               <div class="person info person px-4 mb-2">Person: 0đ</div>
+               <div class="bill-number">
+                    <div class="px-4 py-1 d-flex justify-content-between align-items">
+                         <div class="w-25 text-start">Power</div>
+                         <div class="w-25 text-center powernum">0</div>
+                         <div class="w-25 text-end powerprice">0đ</div>
+                    </div>
+                    <div class="px-4 py-1 d-flex justify-content-between align-items">
+                         <div class="w-25 text-start">House</div>
+                         <div class="w-25 text-center housenum">0</div>
+                         <div class="w-25 text-end houseprice">0đ</div>
+                    </div>
+                    <div class="px-4 py-1 d-flex justify-content-between align-items">
+                         <div class="w-25 text-start">Water</div>
+                         <div class="w-25 text-center"></div>
+                         <div class="w-25 text-end waterprice">0đ</div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     <script>
+          let date = new Date();
+          date = [date.getFullYear(),date.getMonth() + 1,1];
+          date = date.map((item)=>{
+               if(item < 10) return "0" + item;
+               else return item;
+          })
+          date = date.join("-");
+          $('.month').val(date)
+          $.ajax({
+               url: '/app/get-power',
+               method: 'POST',
+               data:{
+                    month: date,
+                    csrfmiddlewaretoken: '{{ csrf_token }}'
+               }
+          }).done((data)=>{
+               current = data.data.current;
+               prev    = data.data.prev;
+               if(current && prev){
+                    $('.cur').val(current);
+                    $('.prv').val(prev);
+               }else{
+                    $('.auth-error').html('Please define this month power value')
+               }
+          }).fail(()=>{
+               alert('Server error');
+          })
+          $('.caculator-btn').click(()=>{
+               $('.auth-error').html('');
+               month = $('.month').val();
+               nom = $('.nom').val();
+               cur = $('.cur').val();
+               prv = $('.prv').val();
+               wtr = $('.wtr').val();
+               if(month && nom && cur && prv && wtr){
+                    $('.datetime').html('Date: ' + month);
+                    $('.powernum').html(cur-prv);
+                    $('.powerprice').html(ShowMoney(4000 * (cur-prv)));
+                    $('.housenum').html(nom);
+                    $('.houseprice').html(ShowMoney(1800000*nom));
+                    $('.waterprice').html(ShowMoney(wtr*1000));
+                    total = 1800000*nom + wtr*1000 + 4000 * (cur-prv);
+                    $('.total').html("Total: " + ShowMoney(total));
+                    $('.person').html("Person: " + ShowMoney(total/2));
+               }else{
+                    $('.auth-error').html('It seem has a field is empty, please check')
+               }
+          })
+          const ShowMoney = (money)=>{
+               money = (String)(money).split('');
+               strmoney = '';
+               count = 0;
+               for(let i = money.length-1; i>=0; i--){
+                    count++;
+                    if(count == 3 && i != 0){
+                         count = 0;
+                         strmoney = '.' + (String)(money[i]) + (String)(strmoney);
+                    }else{
+                         strmoney = (String)(money[i]) + (String)(strmoney);
+                    }
+               }
+               return strmoney + "đ";
+          }
+     </script>
+</body>
+</html>

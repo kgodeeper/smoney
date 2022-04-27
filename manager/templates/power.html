@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Smoney | Power</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+     <style>
+          @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@100;200;300;400;500;600;700&display=swap');
+          *{
+               margin: 0;
+               padding: 0;
+               box-sizing: border-box;
+               font-family: 'Public Sans', sans-serif;
+               user-select: none;
+               background-color: #161616;
+          }
+          .navbar{
+               height: 50px;
+               border-bottom: 2px solid #f8f8f8;
+          }
+          .logo{
+               font-size: 25px !important;
+               color: white;
+               font-weight: bold;
+          }
+          .page-container{
+               height: calc(100vh - 50px);
+               margin-top: 50px;
+               min-height: 500px;
+          }
+          .myinp{
+               width: 200px;
+               display: block;
+               margin: 20px auto !important;
+               padding: 5px 10px;
+               border: none;
+               outline: none;
+               box-shadow: -3px -3px 7px #ffffff22, 3px 3px 7px #000000;
+               border-radius: 5px;
+               background-color: #06060606;
+               box-sizing: content-box;
+               color: white;
+               font-size: 14px !important;
+               font-weight: normal;
+          }
+          .add-power-btn{
+               display: flex;
+               align-items: center;
+               justify-content: center;
+               padding: 5px 30px;
+               color: #dc3545;
+               border-radius: 5px;
+               font-size: 14px !important;
+               margin: 0 auto !important;
+               box-shadow: -3px -3px 7px #ffffff22, 3px 3px 7px #000000;
+          }
+          .add-power-btn i{
+               background-color: inherit;
+          }
+          .add-power-btn:active{
+               box-shadow: 0px 0px 4px #1f0a0a;
+          }
+          .myinp:focus-visible{
+               box-shadow: inset -3px -3px 7px #ffffff22,inset 3px 3px 7px #000000;
+          }
+          .myanchor{
+               font-size: 15px;
+               margin: 0px 10px;
+               text-decoration: none;
+               color: #939393;
+          }
+          .myanchor:hover{
+               color: white !important;
+               transition: .3s;
+          }
+          .loader {
+               color: inherit;
+               font-size: 3px;
+               margin: 0px auto;
+               width: 1em;
+               height: 1em;
+               border-radius: 50%;
+               position: relative;
+               text-indent: -9999em;
+               animation: load4 1.3s infinite linear;
+               /* -webkit-transform: translateZ(0);
+               -ms-transform: translateZ(0);
+               transform: translateZ(0);  */
+          }
+          @keyframes load4 {
+               0%,
+               100% {
+               box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+               }
+               12.5% {
+               box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+               }
+               25% {
+               box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+               }
+               37.5% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+               }
+               50% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+               }
+               62.5% {
+               box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+               }
+               75% {
+               box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+               }
+               87.5% {
+               box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+               }
+          }
+          .power-container{
+               height: 97%;
+               width: calc(100% - 300px);
+               min-width: 700px;
+          }
+          .power-list{
+               font-size: 14px;
+               background-color: #d0d1e2;
+               border-radius: 10px;
+               width: 300px;
+               height: 94%;
+               box-shadow: -3px -3px 8px #ffffff22, 3px 3px 8px #000000;
+          }
+          .power-list h6{
+               background-color: inherit;
+               font-weight: bold;
+          }
+          .power-list div{
+               background-color: inherit;
+          }
+          .power-container{
+               min-width: 400px;
+          }
+     </style>
+</head>
+<body>
+     <div class="navbar px-4 w-100 position-fixed top-0 start-0 d-flex justify-content-between align-items-center">
+          <div class="logo">
+               <i class="fas fa-file-invoice-dollar text-warning"></i>
+               Smoney.
+          </div>
+          <div class="navigation-links d-flex justify-content-center align-items-center">
+               <a href="/app/caculator" class="myanchor">Caculator</a>
+               <a class="myanchor text-white">Power</a>
+               <a href="/app/bill" class="myanchor">Bill</a>
+          </div>
+     </div>
+     <div class="page-container px-5 d-flex justify-content-center align-items-center">
+          <div class="power-container d-flex align-items-start justify-content-start flex-column">
+               <div class="power-inps w-100 d-flex align-items-center justify-content-center">
+                    <select class="myinp month-select"></select>
+                    <input type="text" readonly class="myinp year">
+                    <input type="number" class="myinp number" min=0 placeholder="Number">
+               </div>
+               <div class="add-power-btn">
+                    <i class="fas fa-save me-1"></i>
+                    Save power number
+               </div>
+               <p class="m-0 auth-error text-warning text-center mt-3 w-100"></p>
+          </div>
+          <div class="power-list py-2">
+               <h6 class="m-0 text-center">Power Number</h6>
+               <div style="font-weight: bold" class="px-4 py-1 d-flex justify-content-between align-items">
+                    <div class="w-75 text-start">Month</div>
+                    <div class="w-25 text-end">Number</div>
+               </div>
+               <div class="power-list-number">
+                    
+               </div>
+          </div>
+     </div>
+     <script>
+          $.ajax({
+               method: 'GET',
+               url: '/app/get-all-power'
+          }).done((data)=>{
+               let html='';
+               let list = data.data;
+               for(let i = 0; i< list.length; i++){
+                    item = list[i];
+                    let month = item.date.split("-");
+                    html+=`<div class="px-4 py-1 d-flex justify-content-between align-items">
+                              <div class="w-75 text-start">${month[1]}/${month[0]}</div>
+                              <div class="w-25 text-end">${item.number}</div>
+                         </div>`
+               };
+               $('.power-list-number').html(html);
+          }).fail((error)=>{
+
+          })
+          let html = '';
+          let d = new Date();
+          let curmonth = d.getMonth() + 1;
+          let year = d.getFullYear();
+          $('.year').val(year);
+          for(let i = 1; i<=12; i++){
+               curmonth == i ? html+=`<option value=${i} selected>${i}</option>` :
+               html+=`<option value=${i}>${i}</option>`
+          }
+          $('.month-select').html(html);
+          $('.add-power-btn').click(()=>{
+               if($('.number').val() != ''){
+                    $.ajax({
+                         url: '/app/save-power',
+                         method: 'POST',
+                         data:{
+                              year: $('.year').val(),
+                              month: $('.month-select').val(),
+                              number: $('.number').val(),
+                              csrfmiddlewaretoken: '{{ csrf_token }}'
+                         }
+                    }).done((data)=>{
+                         $('.auth-error').html('');
+                    }).fail((error)=>{
+                         $('.auth-error').html(data.data.status);
+                    })
+               }else{
+                    $('.auth-error').html("Number cannot be null");
+               }
+          })
+
+     </script>
+</body>
+</html>
